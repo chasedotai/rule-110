@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule 110 Pattern Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rule 110 Pattern Generator</h1>
+        <div class="input-section">
+            <input type="text" id="binaryInput" placeholder="Enter a sequence of 1s and 0s (e.g., 1001010)">
+            <select id="styleSelect">
+                <option value="squares">Filled/Empty Squares</option>
+                <option value="circles">Filled/Empty Circles</option>
+                <option value="diamonds">Filled/Empty Diamonds</option>
+                <option value="minimal">Dots/Empty</option>
+            </select>
+            <button onclick="generatePattern()">Generate Pattern</button>
+        </div>
+        <div id="svgContainer"></div>
+        <div id="downloadContainer" style="display: none;">
+            <button onclick="downloadSVG()" class="download-button">Download SVG for Plotting</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
