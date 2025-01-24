@@ -29,7 +29,7 @@ function getCellShape(x, y, cellSize, filled) {
     const style = document.getElementById('styleSelect').value;
     const showEmpty = document.querySelector('input[name="showEmpty"]:checked').value === 'yes';
     
-    // If it's an empty cell (filled === false) and we don't want to show empty cells
+    // Return empty string for non-filled cells when showEmpty is false
     if (!filled && !showEmpty) {
         return '';
     }
@@ -38,39 +38,31 @@ function getCellShape(x, y, cellSize, filled) {
     const centerX = x * cellSize + halfSize;
     const centerY = y * cellSize + halfSize;
     
+    // Only render shapes for filled cells (1s) or when showEmpty is true
     switch (style) {
         case 'circles':
-            if (filled) {
-                return `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" stroke="black" stroke-width="1" />`;
-            } else {
-                return showEmpty ? `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" stroke="black" stroke-width="1" fill="none" />` : '';
-            }
+            if (!filled && !showEmpty) return '';
+            return `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" 
+                    stroke="black" stroke-width="1" fill="none" />`;
         
         case 'diamonds':
+            if (!filled && !showEmpty) return '';
             const diamond = `M ${centerX} ${y * cellSize + 2}
                            L ${(x + 1) * cellSize - 2} ${centerY}
                            L ${centerX} ${(y + 1) * cellSize - 2}
                            L ${x * cellSize + 2} ${centerY} Z`;
-            if (filled) {
-                return `<path d="${diamond}" stroke="black" stroke-width="1" />`;
-            } else {
-                return showEmpty ? `<path d="${diamond}" stroke="black" stroke-width="1" fill="none" />` : '';
-            }
+            return `<path d="${diamond}" stroke="black" stroke-width="1" fill="none" />`;
         
         case 'minimal':
-            return filled ? `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.3}" stroke="black" stroke-width="1" />` : '';
+            return filled ? `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.3}" 
+                    stroke="black" stroke-width="1" fill="none" />` : '';
         
         case 'squares':
         default:
-            if (filled) {
-                return `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
-                       width="${cellSize - 2}" height="${cellSize - 2}" 
-                       stroke="black" stroke-width="1" />`;
-            } else {
-                return showEmpty ? `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
-                       width="${cellSize - 2}" height="${cellSize - 2}" 
-                       stroke="black" stroke-width="1" fill="none" />` : '';
-            }
+            if (!filled && !showEmpty) return '';
+            return `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
+                    width="${cellSize - 2}" height="${cellSize - 2}" 
+                    stroke="black" stroke-width="1" fill="none" />`;
     }
 }
 
