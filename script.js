@@ -29,24 +29,28 @@ function getCellShape(x, y, cellSize, filled) {
     const style = document.getElementById('styleSelect').value;
     const showEmpty = document.querySelector('input[name="showEmpty"]:checked').value === 'yes';
     
-    // Return empty string for non-filled cells when showEmpty is false
+    // If it's not filled (0) and we don't want to show empty cells, return nothing
     if (!filled && !showEmpty) {
         return '';
+    }
+    
+    // If it's not filled (0) and we're not using minimal style, only show if showEmpty is true
+    if (!filled && style !== 'minimal') {
+        if (!showEmpty) {
+            return '';
+        }
     }
     
     const halfSize = cellSize / 2;
     const centerX = x * cellSize + halfSize;
     const centerY = y * cellSize + halfSize;
     
-    // Only render shapes for filled cells (1s) or when showEmpty is true
     switch (style) {
         case 'circles':
-            if (!filled && !showEmpty) return '';
             return `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" 
                     stroke="black" stroke-width="1" fill="none" />`;
         
         case 'diamonds':
-            if (!filled && !showEmpty) return '';
             const diamond = `M ${centerX} ${y * cellSize + 2}
                            L ${(x + 1) * cellSize - 2} ${centerY}
                            L ${centerX} ${(y + 1) * cellSize - 2}
@@ -54,12 +58,12 @@ function getCellShape(x, y, cellSize, filled) {
             return `<path d="${diamond}" stroke="black" stroke-width="1" fill="none" />`;
         
         case 'minimal':
+            // Minimal style only shows filled cells regardless of showEmpty setting
             return filled ? `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.3}" 
                     stroke="black" stroke-width="1" fill="none" />` : '';
         
         case 'squares':
         default:
-            if (!filled && !showEmpty) return '';
             return `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
                     width="${cellSize - 2}" height="${cellSize - 2}" 
                     stroke="black" stroke-width="1" fill="none" />`;
