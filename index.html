@@ -17,10 +17,17 @@
                 <option value="diamonds">Diamonds</option>
                 <option value="minimal">Dots</option>
             </select>
-            <label class="checkbox-container">
-                <input type="checkbox" id="showEmpty" checked>
-                <span class="checkbox-label">Show empty cells</span>
-            </label>
+            <div class="radio-group">
+                <span class="radio-label">Show empty cells:</span>
+                <label class="radio-container">
+                    <input type="radio" name="showEmpty" value="yes" checked>
+                    <span>Yes</span>
+                </label>
+                <label class="radio-container">
+                    <input type="radio" name="showEmpty" value="no">
+                    <span>No</span>
+                </label>
+            </div>
             <button onclick="generatePattern()">Generate Pattern</button>
         </div>
         <div id="svgContainer"></div>

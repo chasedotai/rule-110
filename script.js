@@ -27,7 +27,7 @@ function applyRule110(above) {
 
 function getCellShape(x, y, cellSize, filled) {
     const style = document.getElementById('styleSelect').value;
-    const showEmpty = document.getElementById('showEmpty').checked;
+    const showEmpty = document.querySelector('input[name="showEmpty"]:checked').value === 'yes';
     
     // If it's an empty cell (filled === false) and we don't want to show empty cells
     if (!filled && !showEmpty) {

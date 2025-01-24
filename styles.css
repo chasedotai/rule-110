@@ -144,4 +144,28 @@ svg {
 .checkbox-label {
     font-size: 1rem;
     color: var(--text-color);
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.radio-label {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.radio-container input[type="radio"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
 } 
