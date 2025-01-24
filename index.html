@@ -12,11 +12,15 @@
         <div class="input-section">
             <input type="text" id="binaryInput" placeholder="Enter a sequence of 1s and 0s (e.g., 1001010)">
             <select id="styleSelect">
-                <option value="squares">Filled/Empty Squares</option>
-                <option value="circles">Filled/Empty Circles</option>
-                <option value="diamonds">Filled/Empty Diamonds</option>
-                <option value="minimal">Dots/Empty</option>
+                <option value="squares">Squares</option>
+                <option value="circles">Circles</option>
+                <option value="diamonds">Diamonds</option>
+                <option value="minimal">Dots</option>
             </select>
+            <label class="checkbox-container">
+                <input type="checkbox" id="showEmpty" checked>
+                <span class="checkbox-label">Show empty cells</span>
+            </label>
             <button onclick="generatePattern()">Generate Pattern</button>
         </div>
         <div id="svgContainer"></div>

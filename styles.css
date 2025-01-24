@@ -126,4 +126,22 @@ svg {
     button {
         width: 100%;
     }
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    font-size: 1rem;
+    color: var(--text-color);
 } 

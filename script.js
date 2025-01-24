@@ -27,37 +27,50 @@ function applyRule110(above) {
 
 function getCellShape(x, y, cellSize, filled) {
     const style = document.getElementById('styleSelect').value;
+    const showEmpty = document.getElementById('showEmpty').checked;
+    
+    // If it's an empty cell (filled === false) and we don't want to show empty cells
+    if (!filled && !showEmpty) {
+        return '';
+    }
+    
     const halfSize = cellSize / 2;
     const centerX = x * cellSize + halfSize;
     const centerY = y * cellSize + halfSize;
     
     switch (style) {
         case 'circles':
-            return `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" 
-                    ${filled ? 'fill="black"' : 'fill="none" stroke="black" stroke-width="1"'} />`;
+            if (filled) {
+                return `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" stroke="black" stroke-width="1" />`;
+            } else {
+                return showEmpty ? `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.8}" stroke="black" stroke-width="1" fill="none" />` : '';
+            }
         
         case 'diamonds':
             const diamond = `M ${centerX} ${y * cellSize + 2}
                            L ${(x + 1) * cellSize - 2} ${centerY}
                            L ${centerX} ${(y + 1) * cellSize - 2}
                            L ${x * cellSize + 2} ${centerY} Z`;
-            return `<path d="${diamond}" 
-                    ${filled ? 'fill="black"' : 'fill="none" stroke="black" stroke-width="1"'} />`;
+            if (filled) {
+                return `<path d="${diamond}" stroke="black" stroke-width="1" />`;
+            } else {
+                return showEmpty ? `<path d="${diamond}" stroke="black" stroke-width="1" fill="none" />` : '';
+            }
         
         case 'minimal':
-            return filled ? 
-                `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.3}" fill="black" />` : 
-                '';
+            return filled ? `<circle cx="${centerX}" cy="${centerY}" r="${halfSize * 0.3}" stroke="black" stroke-width="1" />` : '';
         
         case 'squares':
         default:
-            return filled ? 
-                `<rect x="${x * cellSize}" y="${y * cellSize}" 
-                       width="${cellSize}" height="${cellSize}" 
-                       fill="black" />` :
-                `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
+            if (filled) {
+                return `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
                        width="${cellSize - 2}" height="${cellSize - 2}" 
-                       fill="none" stroke="black" stroke-width="1" />`;
+                       stroke="black" stroke-width="1" />`;
+            } else {
+                return showEmpty ? `<rect x="${x * cellSize + 1}" y="${y * cellSize + 1}" 
+                       width="${cellSize - 2}" height="${cellSize - 2}" 
+                       stroke="black" stroke-width="1" fill="none" />` : '';
+            }
     }
 }
 
